@@ -23,8 +23,7 @@ def get_candidates(request):
 def get_candidate_detail(request):
     if(request.method=='GET'):
         try:
-            req_data = request.data
-            phone_no = req_data['contact']
+            phone_no = request.query_params.get('contact')
             profile = Profile.objects.filter(contact=str(phone_no))
             final_data = []
             if(profile.count()==0):
