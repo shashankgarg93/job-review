@@ -3,6 +3,8 @@ from rest_framework.decorators import api_view
 from django.http.response import JsonResponse
 from .serializers import *
 from .models import *
+import json
+
 # Create your views here.
 
 
@@ -72,6 +74,26 @@ def update_status(request):
             updated_status = req_data['status']
             profile = Profile.objects.filter(contact = str(phone_no))
             profile.update(status=str(updated_status))
+            return JsonResponse({'message':'success'})
+        except:
+            return JsonResponse({"message":"failure"})
+
+@api_view(['POST'])
+def add_candidate(request):
+    if(request.method=='POST'):
+        try:
+            req_data = request.data
+            full_name = req_data['full_name']
+            contact = req_data['contact']
+            resume = req_data['resume']
+            #if(Profile.objects.filter(contact=str(contact)).count()>0):
+            #    return JsonResponse({'message':'contact already in use'})
+#             temp_data = {"contact":contact,"full_name":full_name,"resume":resume}
+#             serializer =  profile_serializer(data=temp_data)
+#             serializer.is_valid(raise_exception=True)
+            #serializer.save()
+            profile = Profile.objects.filter(contact=str(contact))[0]
+            print(req_data)
             return JsonResponse({'message':'success'})
         except:
             return JsonResponse({"message":"failure"})

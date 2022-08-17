@@ -21,4 +21,5 @@ urlpatterns = [
     path('getCandidates/', candidateviews.get_candidates),
     path('updateStatus/', candidateviews.update_status),
     path('getCandidateDetail/', candidateviews.get_candidate_detail),
+    path('addCandidate/', candidateviews.add_candidate),
 ]
