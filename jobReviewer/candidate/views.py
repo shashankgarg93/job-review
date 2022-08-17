@@ -30,16 +30,21 @@ def get_candidate_detail(request):
                 return JsonResponse({'message':final_data})
             edhistory = education_history.objects.filter(ref_profile = profile[0])
             workhistory = work_history.objects.filter(ref_profile = profile[0])
-
-
             serializer = profile_serializer(profile[0])
             final_data.append(serializer.data)
-            if(workhistory.count()>0):
-                serializer = work_serializer(workhistory[0])
-                final_data.append(serializer.data)
-            if(edhistory.count()>0):
-                serializer = education_serializer(edhistory[0])
-                final_data.append(serializer.data)
+
+            wh = []
+            for i in range(workhistory.count()):
+                print(i)
+                serializer = work_serializer(workhistory[i])
+                wh.append(serializer.data)
+            final_data.append(wh)
+
+            eh = []
+            for i in range(edhistory.count()):
+                serializer = education_serializer(edhistory[i])
+                eh.append(serializer.data)
+            final_data.append(eh)
             return JsonResponse({'message':final_data})
         except:
             return JsonResponse({"message":"failure"})
