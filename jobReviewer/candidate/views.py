@@ -92,7 +92,7 @@ def add_candidate(request):
 #             serializer =  profile_serializer(data=temp_data)
 #             serializer.is_valid(raise_exception=True)
             #serializer.save()
-            profile = Profile.objects.filter(contact=str(contact))[0]
+            #profile = Profile.objects.filter(contact=str(contact))[0]
             print(req_data)
             return JsonResponse({'message':'success'})
         except:
