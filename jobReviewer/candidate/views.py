@@ -92,8 +92,8 @@ def add_candidate(request):
 #             serializer =  profile_serializer(data=temp_data)
 #             serializer.is_valid(raise_exception=True)
             #serializer.save()
-            profile = Profile.objects.filter(contact=str(contact))[0]
-            print(req_data)
+#            profile = Profile.objects.filter(contact=str(contact))[0]
+            print(dict(req_data))
             return JsonResponse({'message':'success'})
         except:
             return JsonResponse({"message":"failure"})
