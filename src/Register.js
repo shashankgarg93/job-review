@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from 'axios';
 
 const Register = ()=> {
-
     const [details,setDetails] = useState({full_name:"",contact:""});
     const [resume,setResume] = useState(null);
     const [edu,setEdu] = useState([{passing_year:"",school:"",degree:"",cgpa:""}]);
@@ -200,7 +199,7 @@ const Register = ()=> {
                 <br />
 
                 <div>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button type="button" onClick={handleSubmit}>Submit</button>
                 </div>
 
             </form>

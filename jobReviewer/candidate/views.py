@@ -86,14 +86,23 @@ def add_candidate(request):
             full_name = req_data['full_name']
             contact = req_data['contact']
             resume = req_data['resume']
-            #if(Profile.objects.filter(contact=str(contact)).count()>0):
-            #    return JsonResponse({'message':'contact already in use'})
-#             temp_data = {"contact":contact,"full_name":full_name,"resume":resume}
-#             serializer =  profile_serializer(data=temp_data)
-#             serializer.is_valid(raise_exception=True)
-            #serializer.save()
-            #profile = Profile.objects.filter(contact=str(contact))[0]
-            print(req_data)
+            if(Profile.objects.filter(contact=str(contact)).count()>0):
+               return JsonResponse({'message':'contact already in use'})
+            temp_data = {"contact":contact,"full_name":full_name,"resume":resume}
+            serializer =  profile_serializer(data=temp_data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            profile = Profile.objects.filter(contact=str(contact)).first()
+            edhistory = json.loads(req_data['edhistory'])
+            whistory = json.loads(req_data['whistory'])
+#             for val in a:
+#                 print(val['school'])
+            for val in edhistory:
+                ed = education_history(ref_profile = profile, passing_year = val['passing_year'], school = val['school'], degree = val['degree'], cgpa=val['cgpa'])
+                ed.save()
+            for val in whistory:
+                w = work_history(ref_profile = profile, startYear = val['startYear'], endYear = val['endYear'], company = val['company'],work_exp = val['work_exp'],designation = val['designation'])
+                w.save()
             return JsonResponse({'message':'success'})
         except:
             return JsonResponse({"message":"failure"})
