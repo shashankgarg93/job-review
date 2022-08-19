@@ -1,4 +1,4 @@
-// import axios from "axios"
+import React from 'react';
 import {Link} from "react-router-dom"
 const UserList = (props) => {
 
@@ -18,9 +18,10 @@ const UserList = (props) => {
     })
 
     return (
-        <div>
-        <table border={1}>
-            <thead>
+        <div className='container'>
+            <h1>Job Interviewees</h1>
+        <table border={1} className="table table-striped">
+            <thead className='thead-dark'>
                 <tr>
                     <th>Full Name</th>
                     <th>Contact</th>
@@ -31,7 +32,7 @@ const UserList = (props) => {
                 {userData}
             </tbody>
         </table>
-        <Link to={{pathname:"/Register"}}>Apply</Link>
+        <Link to={{pathname:"/Register"}} className="btn btn-dark">Register New Candidate</Link>
         </div>
 
     );

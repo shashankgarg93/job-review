@@ -3,7 +3,7 @@ from django.db import models
 class Profile(models.Model):
     full_name = models.CharField(max_length=200)
     contact = models.CharField(primary_key= True,max_length=10)
-    resume = models.FileField(upload_to='resumes', null=True, blank=True)
+    resume = models.FileField(upload_to='media/', null=True, blank=True)
     status = models.CharField(max_length=15, default = "Applied")
 
 class education_history(models.Model):

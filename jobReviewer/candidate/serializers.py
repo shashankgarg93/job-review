@@ -7,7 +7,7 @@ from .models import *
 class profile_serializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('full_name','contact','status')
+        fields = ('full_name','contact','status','resume')
 
 class work_serializer(serializers.ModelSerializer):
     class Meta:

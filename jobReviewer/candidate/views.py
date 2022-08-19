@@ -86,10 +86,11 @@ def add_candidate(request):
             full_name = req_data['full_name']
             contact = req_data['contact']
             resume = req_data['resume']
+
             if(Profile.objects.filter(contact=str(contact)).count()>0):
                return JsonResponse({'message':'contact already in use'})
             temp_data = {"contact":contact,"full_name":full_name,"resume":resume}
-            serializer =  profile_serializer(data=temp_data)
+            serializer =  profile_serializer(data=req_data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             profile = Profile.objects.filter(contact=str(contact)).first()
